@@ -14,4 +14,4 @@ GRAY = (135,135,135)
 GOLD = (255,255,204)
 BROWSE = (194, 171, 87)
 
-startImage_enabled = pygame.image.load('CHECKER/image/start_button_enable.png').convert_alpha()
+# startImage_enabled = pygame.image.load('CHECKER/image/start_button_enable.png').convert_alpha()
