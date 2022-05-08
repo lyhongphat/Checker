@@ -1,6 +1,7 @@
 # Định nghĩa quân cờ ở đây
 import pygame
 from .const import WHITE, BLACK, GREY
+from .const import CROWN
 from .const import SQUARE_SIZE
 
 class Piece():
@@ -44,11 +45,17 @@ class Piece():
         pygame.draw.circle(win, GREY, (self.x, self.y), largeRadius + self.OUTLINE)
         pygame.draw.circle(win, self.color, (self.x, self.y), largeRadius)
         
-        smallRadius = largeRadius//3
+        smallRadius = largeRadius-7
         pygame.draw.circle(win, GREY, (self.x, self.y), smallRadius + self.OUTLINE)
         pygame.draw.circle(win, self.color, (self.x, self.y), smallRadius)
+        if self.king:
+            win.blit(CROWN, (self.x - CROWN.get_width()//2, self.y - CROWN.get_height()//2))
         
     def __repr__(self):
         # giá trị trả về của biến
         return(str(self.color))
-    
+
+    def move(self, row, col):
+        self.row = row
+        self.col = col
+        self.calculate_position()

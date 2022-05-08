@@ -2,12 +2,14 @@ import sys
 import pygame
 from CHECKER.const import SCREEN_HEIGTH, SCREEN_WIDTH
 from CHECKER.const import SQUARE_SIZE
-from CHECKER.board import Board
+from CHECKER.const import STUPID_ONICHAN
+from CHECKER.game import Game
 
 pygame.init()
 
 WIN = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGTH))
-pygame.display.set_caption('CỜ ĐAM')
+pygame.display.set_caption('OUR GAME')
+pygame.display.set_icon(STUPID_ONICHAN)
 
 FPS = 60
 
@@ -20,20 +22,20 @@ def get_row_col_from_mouse(pos):
 def main():
     run = True
     clock = pygame.time.Clock()
-    board = Board()
     
     while run:
         clock.tick(FPS)
-        board.draw(WIN)
+        game = Game(WIN)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                    # thao tác chuột ở đây
-                pass
+                if event.button == 1:
+                    pos = pygame.mouse.get_pos()
+                    row, col = get_row_col_from_mouse(pos)
         
-        pygame.display.update()
+        game.update()
         
     pygame.quit()
     sys.exit()

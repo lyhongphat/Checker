@@ -8,9 +8,9 @@ from .piece import Piece
 class Board():
     def __init__(self):
         self.board = []
-        self.selected = None
         self.white = self.black = 12
         self.white_king = self.black_king = 0
+        self.white_score = self.black_score = 0
         self.create_board()
         
     def addLabel(self, WIN, text, size, x, y, bold = False, italic = False, color = WHITE):
@@ -42,6 +42,10 @@ class Board():
                 pygame.draw.rect(win, BROWSE, (row * SQUARE_SIZE, col * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
         
         self.addLabel(win, 'CHECKER GAME', 50, 880, 50, bold=True)
+        self.addLabel(win, 'White scores: ' + str(self.white_score), 25, 900, 250, bold=True)
+        self.addLabel(win, 'White kings: ' + str(self.white_king), 25, 900, 300, bold=True, color=BROWSE)
+        self.addLabel(win, 'Black scores: ' + str(self.black_score), 25, 900, 450, bold=True)
+        self.addLabel(win, 'Black kings: ' + str(self.black_king), 25, 900, 500, bold=True, color=BROWSE)
                 
     def create_board(self):
         for row in range(ROWS):
@@ -65,3 +69,17 @@ class Board():
                 piece = self.board[row][col]
                 if piece != 0:
                     piece.draw(win)
+
+    def move(self, piece, row, col):
+        self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
+        piece.move(row, col)
+
+        if row == ROWS or col == COLS:
+            piece.make_king()
+            if piece.color == WHITE:
+                self.white_king += 1
+            elif piece.color == BLACK:
+                self.black_king += 1
+
+    def get_piece(self, row, col):
+        return self.board[row][col]

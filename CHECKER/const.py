@@ -14,5 +14,6 @@ GREY = (135,135,135)
 GOLD = (255,255,204)
 BROWSE = (194, 171, 87)
 
-START = pygame.image.load('CHECKER/image/start_button_enable.png')
-CROWN = pygame.image.load("CHECKER/assets/crown.png")
+START = pygame.image.load('assets/start_button.png')
+CROWN = pygame.transform.scale(pygame.image.load("assets/crown_BaW.png"),(40,20))
+STUPID_ONICHAN = pygame.image.load("assets/baka.png")
