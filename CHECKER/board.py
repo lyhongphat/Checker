@@ -83,3 +83,10 @@ class Board():
 
     def get_piece(self, row, col):
         return self.board[row][col]
+
+    def winner(self):
+        if self.black <= 0:
+            return BLACK
+        elif self.white <= 0:
+            return WHITE
+        return None
