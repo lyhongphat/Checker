@@ -3,6 +3,7 @@ import pygame
 from .const import WHITE, BLACK, BROWSE, GOLD
 from .const import ROWS, COLS
 from .const import BOARD_SIZE, SQUARE_SIZE
+from .piece import Piece
 
 class Board():
     def __init__(self):
@@ -10,6 +11,7 @@ class Board():
         self.selected = None
         self.white = self.black = 12
         self.white_king = self.black_king = 0
+        self.create_board()
         
     def addLabel(self, WIN, text, size, x, y, bold = False, italic = False, color = WHITE):
         """_summary_
@@ -36,10 +38,30 @@ class Board():
         win.fill(BLACK)
         pygame.draw.rect(win, GOLD, (0, 0, BOARD_SIZE, BOARD_SIZE))
         for row in range(ROWS):
-            for col in range(row % 2, ROWS, 2):
+            for col in range(row % 2, COLS, 2):
                 pygame.draw.rect(win, BROWSE, (row * SQUARE_SIZE, col * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
         
         self.addLabel(win, 'CHECKER GAME', 50, 880, 50, bold=True)
                 
     def create_board(self):
-        pass
+        for row in range(ROWS):
+            self.board.append([])
+            for col in range(COLS):
+                if (col % 2) == ((row + 1) % 2):
+                    # Hàng chẵn thì điền ở cột lẻ, hàng lẻ thì điền ở cột chẵn
+                    if row <= 2:
+                        self.board[row].append(Piece(row, col, WHITE))
+                    elif row >= 5:
+                        self.board[row].append(Piece(row, col, BLACK))
+                    else:
+                        self.board[row].append(0)
+                else:
+                    self.board[row].append(0)
+                    
+    def draw(self, win):
+        self.draw_board(win)
+        for row in range(ROWS):
+            for col in range(COLS):
+                piece = self.board[row][col]
+                if piece != 0:
+                    piece.draw(win)
