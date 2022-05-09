@@ -34,10 +34,7 @@ def main():
                 if event.button == 1:
                     pos = pygame.mouse.get_pos()
                     row, col = get_row_col_from_mouse(pos)
-                    print(row, col)
                     game.select(row, col)
-
-        
         game.update()
         
     pygame.quit()
