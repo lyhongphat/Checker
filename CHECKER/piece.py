@@ -14,14 +14,6 @@ class Piece():
         self.color = color
         self.king = False
         # King có thể đi lùi
-        # Ta cho có 2 màu quân là trắng và đen
-        # Quân bên phía ta là màu đen, 
-            # quân đen thì đi lên, nên tọa đồ giảm, suy ra direction = -1
-            # ngược lại thì quân trắng đi xuống, nên direction = 1
-        if self.color == WHITE:
-            self.direction = -1
-        elif self.color == BLACK:
-            self.direction = 1
         self.x = 0
         self.y = 0
         self.calculate_position()

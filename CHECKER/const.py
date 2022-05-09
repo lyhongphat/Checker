@@ -13,6 +13,7 @@ BLACK = (0,0,0)
 GREY = (135,135,135)
 GOLD = (255,255,204)
 BROWSE = (194, 171, 87)
+GREEN = (0,255,0)
 
 START = pygame.image.load('assets/start_button.png')
 CROWN = pygame.transform.scale(pygame.image.load("assets/crown_BaW.png"),(40,20))
