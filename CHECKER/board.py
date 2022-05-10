@@ -99,8 +99,8 @@ class Board():
 
         # Ta cho có 2 màu quân là trắng và đen
         # Quân bên phía ta là màu đen,
-        # quân đen thì đi lên, nên tọa đồ giảm, suy ra direction = -1
-        # ngược lại thì quân trắng đi xuống, nên direction = 1
+        # quân đen thì đi lên, nên tọa đồ giảm
+        # ngược lại thì quân trắng đi xuống
         if piece.color == BLACK or piece.king:
             moves.update(self._traverse_left(row - 1, max(row - 3, -1), -1, piece.color, left))
             moves.update(self._traverse_right(row - 1, max(row - 3, -1), -1, piece.color, right))

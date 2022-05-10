@@ -1,7 +1,7 @@
 import sys
 import pygame
 from CHECKER.const import SCREEN_HEIGTH, SCREEN_WIDTH
-from CHECKER.const import SQUARE_SIZE
+from CHECKER.const import SQUARE_SIZE, BOARD_SIZE
 from CHECKER.const import STUPID_ONICHAN
 from CHECKER.game import Game
 
@@ -33,8 +33,9 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     pos = pygame.mouse.get_pos()
-                    row, col = get_row_col_from_mouse(pos)
-                    game.select(row, col)
+                    if pos[0] < BOARD_SIZE and pos[1] < BOARD_SIZE:
+                        row, col = get_row_col_from_mouse(pos)
+                        print(game.select(row, col))
         game.update()
         
     pygame.quit()
