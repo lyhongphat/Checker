@@ -22,6 +22,7 @@ class Game():
 
     def update(self):
         self.board.draw(self.win)
+        self.draw_valid_moves(self.valid_moves)
         pygame.display.update()
 
     def reset(self):
@@ -39,6 +40,9 @@ class Game():
             cho quân cờ đó'''
             result = self._move(row, col)
             if not result:
+                '''
+                Nếu di chuyển được thì...
+                '''
                 self.selected = None
                 self.select(row, col)
 
@@ -52,10 +56,17 @@ class Game():
     def _move(self, row, col):
         piece = self.board.get_piece(row, col)
         if self.selected and piece == 0 and ((row, col) in self.valid_moves):
+            '''
+            Nếu đã chọn 1 quân để di chuyển rồi
+            và vị trí chọn (row, col) là trống
+            và vị trí chọn (row, col) nằm trong bước đi cho phép
+            
+            thì cho phép di chuyển
+            '''
             self.board.move(self.selected, row, col)
             skipped = self.valid_moves[(row, col)]
             if skipped:
-                self.board.board.remove(skipped)
+                self.board.remove(skipped)
             self.change_turn()
         else:
             return False
@@ -71,7 +82,7 @@ class Game():
     def draw_valid_moves(self, moves):
         for move in moves:
             row, col = move
-            pygame.draw.circle(self.win, GREEN, (row * SQUARE_SIZE + SQUARE_SIZE // 2, col * SQUARE_SIZE + SQUARE_SIZE // 2), 15)
+            pygame.draw.circle(self.win, GREEN, (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2), 15)
 
     def winner(self):
         return self.board.winner()

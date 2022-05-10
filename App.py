@@ -22,10 +22,10 @@ def get_row_col_from_mouse(pos):
 def main():
     run = True
     clock = pygame.time.Clock()
+    game = Game(WIN)
     
     while run:
         clock.tick(FPS)
-        game = Game(WIN)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -35,7 +35,7 @@ def main():
                     pos = pygame.mouse.get_pos()
                     if pos[0] < BOARD_SIZE and pos[1] < BOARD_SIZE:
                         row, col = get_row_col_from_mouse(pos)
-                        print(game.select(row, col))
+                        game.select(row, col)
         game.update()
         
     pygame.quit()

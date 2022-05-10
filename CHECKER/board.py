@@ -8,9 +8,10 @@ from .piece import Piece
 class Board():
     def __init__(self):
         self.board = []
-        self.white = self.black = 12
-        self.white_king = self.black_king = 0
+        self.piece_init = 12
+        self.white = self.black = self.piece_init
         self.white_score = self.black_score = 0
+        self.white_king = self.black_king = 0
         self.create_board()
         
     def addLabel(self, WIN, text, size, x, y, bold = False, italic = False, color = WHITE):
@@ -40,12 +41,7 @@ class Board():
         for row in range(ROWS):
             for col in range(row % 2, COLS, 2):
                 pygame.draw.rect(win, BROWSE, (row * SQUARE_SIZE, col * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-        
         self.addLabel(win, 'CHECKER GAME', 50, 880, 50, bold=True)
-        self.addLabel(win, 'White scores: ' + str(self.white_score), 25, 900, 250, bold=True)
-        self.addLabel(win, 'White kings: ' + str(self.white_king), 25, 900, 300, bold=True, color=BROWSE)
-        self.addLabel(win, 'Black scores: ' + str(self.black_score), 25, 900, 450, bold=True)
-        self.addLabel(win, 'Black kings: ' + str(self.black_king), 25, 900, 500, bold=True, color=BROWSE)
                 
     def create_board(self):
         for row in range(ROWS):
@@ -61,20 +57,24 @@ class Board():
                         self.board[row].append(0)
                 else:
                     self.board[row].append(0)
-                    
+
     def draw(self, win):
         self.draw_board(win)
         for row in range(ROWS):
             for col in range(COLS):
                 piece = self.board[row][col]
                 if piece != 0:
+                    self.calc_score()
                     piece.draw(win)
+        self.addLabel(win, 'White score: ' + str(self.white_score), 25, 900, 250, bold=True)
+        self.addLabel(win, 'White kings: ' + str(self.white_king), 25, 900, 300, bold=True, color=BROWSE)
+        self.addLabel(win, 'Black score: ' + str(self.black_score), 25, 900, 450, bold=True)
+        self.addLabel(win, 'Black king: ' + str(self.black_king), 25, 900, 500, bold=True, color=BROWSE)
 
     def move(self, piece, row, col):
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
         piece.move(row, col)
-
-        if row == ROWS or col == COLS:
+        if row == ROWS - 1 or row == 0:
             piece.make_king()
             if piece.color == WHITE:
                 self.white_king += 1
@@ -175,3 +175,16 @@ class Board():
             right += 1
 
         return moves
+
+    def remove(self, pieces):
+        for piece in pieces:
+            self.board[piece.row][piece.col] = 0
+            if piece != 0:
+                if piece.color == WHITE:
+                    self.white -= 1
+                else:
+                    self.black -= 1
+
+    def calc_score(self):
+        self.white_score = self.piece_init - self.black
+        self.black_score = self.piece_init - self.white
