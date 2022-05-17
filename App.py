@@ -2,14 +2,12 @@ import sys
 import pygame
 from CHECKER.const import SCREEN_HEIGTH, SCREEN_WIDTH
 from CHECKER.const import SQUARE_SIZE, BOARD_SIZE
-from CHECKER.const import STUPID_ONICHAN
 from CHECKER.game import Game
 
 pygame.init()
 
 WIN = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGTH))
 pygame.display.set_caption('OUR GAME')
-pygame.display.set_icon(STUPID_ONICHAN)
 
 FPS = 60
 
@@ -36,8 +34,9 @@ def main():
                     if pos[0] < BOARD_SIZE and pos[1] < BOARD_SIZE:
                         row, col = get_row_col_from_mouse(pos)
                         game.select(row, col)
+
         game.update()
-        
+
     pygame.quit()
     sys.exit()
     

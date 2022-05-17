@@ -17,4 +17,4 @@ GREEN = (0,255,0)
 
 START = pygame.image.load('assets/start_button.png')
 CROWN = pygame.transform.scale(pygame.image.load("assets/crown_BaW.png"),(40,20))
-STUPID_ONICHAN = pygame.image.load("assets/baka.png")
+STUPID_ONICHAN = pygame.transform.scale(pygame.image.load("assets/baka.png"), (400, 400))

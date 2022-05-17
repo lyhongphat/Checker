@@ -8,8 +8,7 @@ from .piece import Piece
 class Board():
     def __init__(self):
         self.board = []
-        self.piece_init = 12
-        self.white = self.black = self.piece_init
+        self.white = self.black = 12
         self.white_score = self.black_score = 0
         self.white_king = self.black_king = 0
         self.create_board()
@@ -181,10 +180,15 @@ class Board():
             self.board[piece.row][piece.col] = 0
             if piece != 0:
                 if piece.color == WHITE:
+                    if piece.king:
+                        self.white_king -= 1
                     self.white -= 1
                 else:
+                    if piece.king:
+                        self.black_king -= 1
                     self.black -= 1
 
     def calc_score(self):
-        self.white_score = self.piece_init - self.black
-        self.black_score = self.piece_init - self.white
+        self.white_score = self.white - self.black
+        self.black_score = self.black - self.white
+        return self.black_score
