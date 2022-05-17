@@ -63,22 +63,22 @@ class Board():
             for col in range(COLS):
                 piece = self.board[row][col]
                 if piece != 0:
-                    self.calc_score()
                     piece.draw(win)
-        self.addLabel(win, 'White score: ' + str(self.white_score), 25, 900, 250, bold=True)
+        # self.addLabel(win, 'White score: ' + str(self.white_score), 25, 900, 250, bold=True)
         self.addLabel(win, 'White kings: ' + str(self.white_king), 25, 900, 300, bold=True, color=BROWSE)
-        self.addLabel(win, 'Black score: ' + str(self.black_score), 25, 900, 450, bold=True)
+        # self.addLabel(win, 'Black score: ' + str(self.black_score), 25, 900, 450, bold=True)
         self.addLabel(win, 'Black king: ' + str(self.black_king), 25, 900, 500, bold=True, color=BROWSE)
 
     def move(self, piece, row, col):
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
         piece.move(row, col)
         if row == ROWS - 1 or row == 0:
-            piece.make_king()
-            if piece.color == WHITE:
-                self.white_king += 1
-            elif piece.color == BLACK:
-                self.black_king += 1
+            if not piece.king:
+                piece.make_king()
+                if piece.color == WHITE:
+                    self.white_king += 1
+                elif piece.color == BLACK:
+                    self.black_king += 1
 
     def get_piece(self, row, col):
         return self.board[row][col]
@@ -188,7 +188,13 @@ class Board():
                         self.black_king -= 1
                     self.black -= 1
 
-    def calc_score(self):
-        self.white_score = self.white - self.black
-        self.black_score = self.black - self.white
-        return self.black_score
+    def evaluate(self):
+        return self.white - self.black + (self.white_king * 0.5 - self.black_king * 0.5)
+
+    def get_all_pieces(self, color):
+        pieces = []
+        for row in self.board:
+            for piece in row:
+                if piece != 0 and piece.color == color:
+                    pieces.append(piece)
+        return pieces

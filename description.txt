@@ -3,12 +3,12 @@ Game đánh cờ đam (checker)
 Thư viện cần:
     pygame
 
-AI:
-    Sử dụng thuật toán tìm kiếm: Back tracking
+AI để đấu với máy:
+    Sử dụng thuật toán tìm kiếm: từ từ đang code chưa xong =))))
 
 Người thực hiện:
-    Nguyễn Thành Lợi - 20110674,
-    Lý Hồng Phát - 20110692,
-    NGuyễn Khoa Quang Thắng - 20133090
+    20110674	Nguyễn Thành Lợi
+    20110692	Lý Hồng Phát
+    20133090	Nguyễn Khoa Quang Thắng
 
 Luật chơi:
