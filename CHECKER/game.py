@@ -1,40 +1,15 @@
 import pygame
+
 from .const import WHITE, BLACK, GREEN
 from .const import SQUARE_SIZE
 from .board import Board
-from copy import deepcopy
-
-def get_all_moves(board, color, game):
-    moves = []
-    for piece in board.get_all_pieces(color):
-        valid_moves = board.get_valid_moves(piece)
-        for move, skip in valid_moves.items():
-            draw_moves(game, board, piece)
-            temp_board = deepcopy(board)
-            temp_piece = temp_board.get_piece(piece.row, piece.col)
-            new_board = simulate_move(temp_piece, move, temp_board, game, skip)
-            moves.append(new_board)
-    return moves
-
-def simulate_move(piece, move, board, game, skip):
-    board.move(piece, move[0], move[1])
-    if skip:
-        board.remove(skip)
-    return board
-
-def draw_moves(game, board, piece):
-    valid_moves = board.get_valid_moves(piece)
-    board.draw(game.win)
-    pygame.draw.circle(game.win, (0, 255, 0), (piece.x, piece.y), 50, 5)
-    game.draw_valid_moves(valid_moves.keys())
-    pygame.display.update()
-    pygame.time.delay(100)
+from .board import addLabel
+from AI.Algorithm import get_all_moves
 
 class Game():
     def __init__(self, win):
         self._init()
         self.win = win
-        self.initial = self.board
 
     def _init(self):
         """
@@ -51,6 +26,16 @@ class Game():
     def update(self):
         self.board.draw(self.win)
         self.draw_valid_moves(self.valid_moves)
+
+        addLabel(self.win, 'CHECKER GAME', 50, 880, 50, bold=True)
+        pygame.draw.rect(self.win, GREEN, (800, 650, 500, 500))
+
+        addLabel(self.win, 'Turn: ', 50, 850, 700, bold=True, italic=True)
+        if self.turn == WHITE:
+            pygame.draw.rect(self.win, WHITE, (1000, 705, 200, 50))
+        elif self.turn == BLACK:
+            pygame.draw.rect(self.win, BLACK, (1000, 705, 200, 50))
+
         pygame.display.update()
 
     def reset(self):
@@ -73,7 +58,6 @@ class Game():
                 '''
                 self.selected = None
                 self.select(row, col)
-
         piece = self.board.get_piece(row, col)
         if piece != 0 and piece.color == self.turn:
             self.selected = piece
@@ -109,10 +93,24 @@ class Game():
     def draw_valid_moves(self, moves):
         for move in moves:
             row, col = move
-            pygame.draw.circle(self.win, GREEN, (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2), 15)
+            pygame.draw.circle(self.win,
+                               GREEN,
+                               (col * SQUARE_SIZE + SQUARE_SIZE // 2,
+                                row * SQUARE_SIZE + SQUARE_SIZE // 2),
+                               15)
 
     def winner(self):
-        return self.board.winner()
+        '''
+        Bên cạnh trường hợp ăn hết quân để thắng
+        thì ta còn 1 trường hợp nữa là hết đường đi
+        mặc dù khâu tính toán chậm hơn
+        :return:
+        '''
+        if not which_valid_move(self.board, WHITE):
+            return BLACK
+        elif not which_valid_move(self.board, BLACK):
+            return WHITE
+        return None
 
     def get_board(self):
         return self.board
@@ -120,3 +118,10 @@ class Game():
     def ai_move(self, board):
         self.board = board
         self.change_turn()
+
+def which_valid_move(thisBoard, color):
+    moves = []
+    for piece in thisBoard.get_all_pieces(color):
+        valid_moves = thisBoard.get_valid_moves(piece)
+        moves.append(valid_moves)
+    return moves
