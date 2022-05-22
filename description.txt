@@ -4,11 +4,12 @@ Thư viện cần:
     pygame
 
 AI để đấu với máy:
-    Sử dụng thuật toán tìm kiếm: từ từ đang code chưa xong =))))
+    Sử dụng thuật toán tìm kiếm: DFS
 
 Người thực hiện:
-    20110674	Nguyễn Thành Lợi
-    20110692	Lý Hồng Phát
-    20133090	Nguyễn Khoa Quang Thắng
-
-Luật chơi:
+    Nguyễn Thành Lợi            20110674
+    Lý Hồng Phát                20110692
+    Nguyễn Khoa Quang Thắng     20133090
+    Trần Ngọc Hoàng             18110288
+    Nguyễn Khắc Thành Sang      18110353
+    Lương Gia Huy               20133047
