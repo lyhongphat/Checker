@@ -12,7 +12,7 @@ AI:
 
 Authors:
 Nguyễn Thành Lợi            20110674
-Lý Hồng Phát                20110692
+\nLý Hồng Phát                20110692
 Nguyễn Khoa Quang Thắng     20133090
 Trần Ngọc Hoàng             18110288
 Nguyễn Khắc Thành Sang      18110353
