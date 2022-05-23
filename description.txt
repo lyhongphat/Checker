@@ -1,7 +1,9 @@
 Game đánh cờ đam (checker)
 
 Thư viện cần:
-    pygame : giao diện
+    pygame : giao diện,
+    copy.deepcopy,
+    numpy.Infinity
 
 AI để đấu với máy:
     Sử dụng thuật toán tìm kiếm: Depth limited search
