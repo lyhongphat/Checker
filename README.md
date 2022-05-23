@@ -11,9 +11,15 @@ AI:
     Searching algorithm: Depth limited search
 
 Authors:
+
 Nguyễn Thành Lợi            20110674
-\nLý Hồng Phát                20110692
+
+Lý Hồng Phát                20110692
+
 Nguyễn Khoa Quang Thắng     20133090
+
 Trần Ngọc Hoàng             18110288
+
 Nguyễn Khắc Thành Sang      18110353
+
 Lương Gia Huy               20133047
