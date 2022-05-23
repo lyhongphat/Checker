@@ -1,10 +1,10 @@
 Game đánh cờ đam (checker)
 
 Thư viện cần:
-    pygame
+    pygame : giao diện
 
 AI để đấu với máy:
-    Sử dụng thuật toán tìm kiếm: DFS
+    Sử dụng thuật toán tìm kiếm: Depth limited search
 
 Người thực hiện:
     Nguyễn Thành Lợi            20110674
@@ -13,3 +13,4 @@ Người thực hiện:
     Trần Ngọc Hoàng             18110288
     Nguyễn Khắc Thành Sang      18110353
     Lương Gia Huy               20133047
+
