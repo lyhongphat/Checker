@@ -15,18 +15,13 @@
 1. **Clone** this repository to your local machine:
     
     ```bash
-    bash
-    Copy code
     git clone https://github.com/lyhongphat/Checker.git
     cd Checker
-    
     ```
     
 2. **Install dependencies**:
     
     ```bash
-    bash
-    Copy code
     pip install -r requirements.txt
     
     ```
@@ -37,8 +32,6 @@
 1. Start the game by running:
     
     ```bash
-    bash
-    Copy code
     python main.py
     
     ```
