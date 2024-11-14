@@ -1,4 +1,4 @@
-# Checker
+# Chess - Minimax Algorithm (max-min search)
 
 ## Introduction
 
